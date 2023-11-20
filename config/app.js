@@ -16,6 +16,8 @@ let flash = require('connect-flash')
 
 let usermodel = require('../models/user')
 let user = usermodel.user
+passport.use(user.createStrategy())
+
 
 app.use(session({
   secret:"SomeSecret",

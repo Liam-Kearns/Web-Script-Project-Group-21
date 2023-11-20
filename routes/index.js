@@ -16,7 +16,7 @@ router.get('/login',function(req,res,next){
     })
   }
   else{
-    return res.redirect('/')
+    return res.redirect('/index')
   }
 })
 
@@ -87,6 +87,16 @@ router.post('/register',function(req,res,next){
       })
     }
   })
+})
+
+router.get('/logout',function(req,res,next){
+  req.logout(function(err){
+    if(err)
+    {
+      return next(err)
+    }
+  })
+  res.redirect('index')
 })
 
 /* GET home page. */

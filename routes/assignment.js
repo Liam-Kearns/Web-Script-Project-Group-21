@@ -2,6 +2,15 @@ const express = require('express');
 const router = express.Router();
 const Assignment = require('../models/assignment_db');
 
+let mongoose = require('mongoose')
+function requireAuth(req,res,next){
+  if(!req.isAuthenticated())
+  {
+    return res.redirect('/login')
+  }
+  next()
+}
+
 // Read operation 
 router.get('/', async (req, res, next) => {
   try {
@@ -15,12 +24,12 @@ router.get('/', async (req, res, next) => {
 });
 
 // render a form to add a new assignment
-router.get('/new', (req, res) => {
+router.get('/new',requireAuth, (req, res) => {
   res.render('newAssignment');
 });
 
 // handle the form submission to add a new assignment
-router.post('/new', async (req, res) => {
+router.post('/new',requireAuth, async (req, res) => {
   try {
     const newAssignment = new Assignment(req.body);
     await newAssignment.save();
@@ -31,7 +40,7 @@ router.post('/new', async (req, res) => {
   }
 });
 // render a form to edit an existing assignment
-router.get('/edit/:id', async (req, res) => {
+router.get('/edit/:id',requireAuth, async (req, res) => {
   try {
     const assignment = await Assignment.findById(req.params.id).exec();
     res.render('editassignment', { assignment });
@@ -42,7 +51,7 @@ router.get('/edit/:id', async (req, res) => {
 });
 
 // handle the form submission to edit an existing assignment
-router.post('/edit/:id', async (req, res) => {
+router.post('/edit/:id',requireAuth, async (req, res) => {
   try {
     await Assignment.findByIdAndUpdate(req.params.id, req.body).exec();
     res.redirect('/assignments');
@@ -53,7 +62,7 @@ router.post('/edit/:id', async (req, res) => {
 });
 
 // Delete operation 
-router.get('/delete/:id', async (req, res) => {
+router.get('/delete/:id',requireAuth, async (req, res) => {
   try {
     await Assignment.findByIdAndDelete(req.params.id).exec();
     res.redirect('/assignments');
@@ -64,7 +73,7 @@ router.get('/delete/:id', async (req, res) => {
 });
 
 // Render editAssignment.ejs 
-router.get(['/editassignment/:id', '/editassignment'], async (req, res) => {
+router.get(['/editassignment/:id', '/editassignment'],requireAuth, async (req, res) => {
   console.log('Reached /editassignment/:id route');
   if (req.params.id) {
     try {
