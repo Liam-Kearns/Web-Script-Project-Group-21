@@ -100,6 +100,16 @@ router.get('/logout', function(req, res, next) {
   });
 });
 
+let mongoose = require('mongoose')
+function requireAuth(req,res,next){
+  console.log('Middleware called');
+
+  if(!req.isAuthenticated())
+  {
+    return res.redirect('/login')
+  }
+  next()
+}
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'index' });
@@ -109,7 +119,7 @@ router.get('/', function(req, res, next) {
 router.get('/index', function(req, res, next) {
   res.render('index', { title: 'index' });
 });
-router.get('/newassignment', function(req, res, next) {
+router.get('/newassignment',requireAuth, function(req, res, next) {
   res.render('newassignment', { title: 'newassignment' });
 }); 
 
