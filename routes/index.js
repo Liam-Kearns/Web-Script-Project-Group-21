@@ -30,15 +30,17 @@ router.post('/login',function(req,res,next){
     {
       req.flash('loginMessage','AuthenticationError')
       return res.redirect('/login')
-    }
+    } 
     req.login(user,(err)=>{
       if(err)
       {
         return next(err)
       }
-      return res.redirect("/assignments")
-    })
-  })
+      return passport.authenticate('local')(req, res, () => {
+        res.redirect('/assignments');
+      });
+        })
+  })(req, res, next);
 })
 
 router.get('/register',function(req,res,next){
@@ -83,21 +85,20 @@ router.post('/register',function(req,res,next){
     }
     else{
       return passport.authenticate('local')(req,res,()=>{
-        res.redirect('/assignments')
+        res.redirect('assignments')
       })
     }
   })
 })
 
-router.get('/logout',function(req,res,next){
-  req.logout(function(err){
-    if(err)
-    {
-      return next(err)
+router.get('/logout', function(req, res, next) {
+  req.logout(function(err) {
+    if (err) {
+      return next(err);
     }
-  })
-  res.redirect('index')
-})
+    res.redirect('/index');
+  });
+});
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

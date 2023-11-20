@@ -8,8 +8,8 @@ const Assignment = require('../models/assignment_db'); // Import the assignment 
 
 const app = express();
 
-let session = require('express-session')
-let passport = require('passport')
+const session = require('express-session')
+const passport = require('passport')
 let passportlocal = require('passport-local')
 let localstrategy = passportlocal.Strategy
 let flash = require('connect-flash')
@@ -49,7 +49,7 @@ const assignmentsRouter = require('../routes/assignment');
 // What routers can use
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/assignments', assignmentsRouter);
+app.use('/assignments',  assignmentsRouter);
 
 app.get('/editassignment/:id', async (req, res, next) => {
   try {

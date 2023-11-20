@@ -4,6 +4,8 @@ const Assignment = require('../models/assignment_db');
 
 let mongoose = require('mongoose')
 function requireAuth(req,res,next){
+  console.log('Middleware called');
+
   if(!req.isAuthenticated())
   {
     return res.redirect('/login')
@@ -12,7 +14,7 @@ function requireAuth(req,res,next){
 }
 
 // Read operation 
-router.get('/', async (req, res, next) => {
+router.get('/', requireAuth,async (req, res, next) => {
   try {
     const assignList = await Assignment.find().exec();
     console.log(assignList); 
@@ -25,7 +27,7 @@ router.get('/', async (req, res, next) => {
 
 // render a form to add a new assignment
 router.get('/new',requireAuth, (req, res) => {
-  res.render('newAssignment');
+  res.render('newassignment');
 });
 
 // handle the form submission to add a new assignment

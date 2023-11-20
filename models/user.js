@@ -2,7 +2,7 @@ const { data } = require('jquery')
 let mongoose = require('mongoose')
 let passportlocalMongoose = require('passport-local-mongoose')
 
-let user = mongoose.Schema({
+let user = new mongoose.Schema({
     username:
     {
         type:String,
