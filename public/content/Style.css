@@ -9,7 +9,7 @@ body {
     height: 100%;
     background-color: black;
     /* gradient*/
-    background: linear-gradient(#5386A6, #C2E5F2);
+    background: linear-gradient(#63c0fa, #C2E5F2);
     /*assigns fonts from importeed google fonts */
     font-family: 'Inter', sans-serif;
     font-weight: 400;

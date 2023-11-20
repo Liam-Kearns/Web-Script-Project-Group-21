@@ -8,6 +8,26 @@ const Assignment = require('../models/assignment_db'); // Import the assignment 
 
 const app = express();
 
+let session = require('express-session')
+let passport = require('passport')
+let passportlocal = require('passport-local')
+let localstrategy = passportlocal.Strategy
+let flash = require('connect-flash')
+
+let usermodel = require('../models/user')
+let user = usermodel.user
+
+app.use(session({
+  secret:"SomeSecret",
+  saveUninitialized:false,
+  resave:false
+}))
+app.use(flash())
+passport.serializeUser(user.serializeUser())
+passport.deserializeUser(user.deserializeUser())
+app.use(passport.initialize())
+app.use(passport.session())
+
 // view engine setup
 app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'ejs');
