@@ -62,11 +62,11 @@ router.post('/register',function(req,res,next){
     email: req.body.email,
     displayname: req.body.displayname
   })
-  user.register(newuser, req,body.password,(err)=>
+  user.register(newuser, req.body.password,(err)=>
   {
     if(err)
     {
-      console.log('error in inseting new user')
+      console.log('error in inserting new user')
       if(err.name == 'UserExistError')
       {
         req.flash('registermessage',
