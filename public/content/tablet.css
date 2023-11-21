@@ -9,7 +9,7 @@ body {
     height: 100%;
     background-color: black;
         /* gradient*/
-    background: linear-gradient(#5386A6, #C2E5F2);
+    background: linear-gradient(#63c0fa, #C2E5F2);
         /*assigns fonts from importeed google fonts */
     font-family: 'Inter', sans-serif;
     font-weight: 400;
@@ -262,3 +262,93 @@ nav a:hover::before{
         box-shadow: 0px 5px 15px 0px rgba(190, 189, 195, 0.3);
     }
     
+
+    /*LOGIN STYLING*/
+.logincontainer {
+    max-width: 400px;
+    margin: 50px auto;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 400px;
+  }
+  
+  .alert {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .alert-danger {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+  }
+  
+  .loginrow {
+    margin-bottom: 20px;
+  }
+  
+  .logincontainer h1 {
+    text-align: center;
+    color: #333;
+  }
+  
+  .logincontainer form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .logincontainer label {
+    font-weight: bold;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+  }
+  
+  .butn {
+    cursor: pointer;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  }
+  
+  .butn-success {
+    background-color: #28a745;
+    color: #fff;
+  }
+  
+  .butn-warning {
+    background-color: #ff0707;
+    color: #333;
+  }
+  
+  .text-right {
+    text-align: right;
+  }
+  
+  .logincontainer a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .logincontainer a:hover {
+    text-decoration: underline;
+  }
+  
