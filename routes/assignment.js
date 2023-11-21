@@ -18,7 +18,7 @@ router.get('/', requireAuth,async (req, res, next) => {
   try {
     const assignList = await Assignment.find().exec();
     console.log(assignList); 
-    res.render('assignments', { assignList });
+    res.render('assignments', { assignList, displayname: req.user ? req.user.displayname : ''  });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -45,7 +45,7 @@ router.post('/new',requireAuth, async (req, res) => {
 router.get('/edit/:id',requireAuth, async (req, res) => {
   try {
     const assignment = await Assignment.findById(req.params.id).exec();
-    res.render('editassignment', { assignment });
+    res.render('editassignment', { assignment, displayname: req.user ? req.user.displayname : '' });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -84,14 +84,14 @@ router.get(['/editassignment/:id', '/editassignment'],requireAuth, async (req, r
         res.status(404).send('Assignment not found');
         return;
       }
-      res.render('editassignment', { assignment });
+      res.render('editassignment', { assignment, displayname: req.user ? req.user.displayname : '' });
     } catch (err) {
       console.error(err);
       res.status(500).json({ error: 'Internal Server Error' });
     }
   } else {
     // Render the editassignment.ejs for static route
-    res.render('editassignment', { title: 'editassignment' });
+    res.render('editassignment', { title: 'editassignment', displayname: req.user ? req.user.displayname : ''  });
   }
 });
 

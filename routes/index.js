@@ -11,8 +11,8 @@ router.get('/login',function(req,res,next){
     res.render('auth/login',
     {
       title:'login',
-      message:req.flash('loginMessage'),
-      displayname: req.user ? req.user.displayname:''
+      message: req.flash('loginMessage'),
+      displayname:''
     })
   }
   else{
@@ -50,7 +50,7 @@ router.get('/register',function(req,res,next){
     {
       title:'register',
       message:req.flash('registerMessage'),
-      displayname: req.user ? req.user.displayname:''
+      displayname: req.user ? req.user.displayname : '' 
     })
   }
   else{
@@ -91,7 +91,7 @@ router.post('/register',function(req,res,next){
   })
 })
 
-router.get('/logout', function(req, res, next) {
+router.get('/logout', function(req, res) {
   req.logout(function(err) {
     if (err) {
       return next(err);
@@ -112,16 +112,22 @@ function requireAuth(req,res,next){
 }
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'index' });
+  res.render('index', { title: 'index', displayname: req.user ? req.user.displayname : ''  });
 });
 
 
 router.get('/index', function(req, res, next) {
-  res.render('index', { title: 'index' });
+  res.render('index', { title: 'index', displayname: req.user ? req.user.displayname : '' });
 });
+
 router.get('/newassignment',requireAuth, function(req, res, next) {
-  res.render('newassignment', { title: 'newassignment' });
+  res.render('newassignment', { title: 'newassignment', displayname: req.user ? req.user.displayname : ''  });
 }); 
+router.get('/editassignment',requireAuth, function(req, res, next) {
+  res.render('editassignment', { title: 'editassignment', displayname: req.user ? req.user.displayname : ''  });
+}); 
+
+
 
 
 module.exports = router;
