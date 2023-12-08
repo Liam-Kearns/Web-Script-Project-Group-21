@@ -16,7 +16,7 @@ router.get('/login',function(req,res,next){
     })
   }
   else{
-    return res.redirect('/index')
+    return res.redirect('/')
   }
 })
 
@@ -37,7 +37,7 @@ router.post('/login',function(req,res,next){
         return next(err)
       }
       return passport.authenticate('local')(req, res, () => {
-        res.redirect('/assignments');
+        res.redirect('/tickets');
       });
         })
   })(req, res, next);
@@ -85,7 +85,7 @@ router.post('/register',function(req,res,next){
     }
     else{
       return passport.authenticate('local')(req,res,()=>{
-        res.redirect('assignments')
+        res.redirect('tickets')
       })
     }
   })
@@ -96,7 +96,7 @@ router.get('/logout', function(req, res) {
     if (err) {
       return next(err);
     }
-    res.redirect('/index');
+    res.redirect('/');
   });
 });
 
@@ -116,14 +116,14 @@ router.get('/', function(req, res, next) {
 });
 
 
-router.get('/index', function(req, res, next) {
+router.get('/', function(req, res, next) {
   res.render('index', { title: 'index', displayname: req.user ? req.user.displayname : '' });
 });
 
-router.get('/newassignment',requireAuth, function(req, res, next) {
+router.get('/new_ticket',requireAuth, function(req, res, next) {
   res.render('newassignment', { title: 'newassignment', displayname: req.user ? req.user.displayname : ''  });
 }); 
-router.get('/editassignment',requireAuth, function(req, res, next) {
+router.get('/edit_ticket',requireAuth, function(req, res, next) {
   res.render('editassignment', { title: 'editassignment', displayname: req.user ? req.user.displayname : ''  });
 }); 
 

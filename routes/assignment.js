@@ -35,7 +35,7 @@ router.post('/new',requireAuth, async (req, res) => {
   try {
     const newAssignment = new Assignment(req.body);
     await newAssignment.save();
-    res.redirect('/assignments');
+    res.redirect('/tickets');
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -56,7 +56,7 @@ router.get('/edit/:id',requireAuth, async (req, res) => {
 router.post('/edit/:id',requireAuth, async (req, res) => {
   try {
     await Assignment.findByIdAndUpdate(req.params.id, req.body).exec();
-    res.redirect('/assignments');
+    res.redirect('/tickets');
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -67,7 +67,7 @@ router.post('/edit/:id',requireAuth, async (req, res) => {
 router.get('/delete/:id',requireAuth, async (req, res) => {
   try {
     await Assignment.findByIdAndDelete(req.params.id).exec();
-    res.redirect('/assignments');
+    res.redirect('/tickets');
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -75,8 +75,8 @@ router.get('/delete/:id',requireAuth, async (req, res) => {
 });
 
 // Render editAssignment.ejs 
-router.get(['/editassignment/:id', '/editassignment'],requireAuth, async (req, res) => {
-  console.log('Reached /editassignment/:id route');
+router.get(['/edit_ticket/:id', '/edit_ticket'],requireAuth, async (req, res) => {
+  console.log('Reached /edit_ticket/:id route');
   if (req.params.id) {
     try {
       const assignment = await Assignment.findById(req.params.id).exec();
@@ -91,7 +91,7 @@ router.get(['/editassignment/:id', '/editassignment'],requireAuth, async (req, r
     }
   } else {
     // Render the editassignment.ejs for static route
-    res.render('editassignment', { title: 'editassignment', displayname: req.user ? req.user.displayname : ''  });
+    res.render('editassignment', { title: 'Edit Ticket', displayname: req.user ? req.user.displayname : ''  });
   }
 });
 

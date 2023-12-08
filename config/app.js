@@ -49,9 +49,9 @@ const assignmentsRouter = require('../routes/assignment');
 // What routers can use
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/assignments',  assignmentsRouter);
+app.use('/tickets',  assignmentsRouter);
 
-app.get('/editassignment/:id', async (req, res, next) => {
+app.get('/edit_ticket/:id', async (req, res, next) => {
   try {
     const assignment = await Assignment.findById(req.params.id).exec();
     if (!assignment) {
@@ -60,12 +60,12 @@ app.get('/editassignment/:id', async (req, res, next) => {
     }
     res.render('editassignment', { assignment });
   } catch (err) {
-    console.error('Error in /editassignment/:id route:', err);
+    console.error('Error in /edit_ticket/:id route:', err);
     next(err); 
   }
 });
 // Route to handle updating assignments
-app.post('/editassignment/:id', async (req, res, next) => {
+app.post('/edit_ticket/:id', async (req, res, next) => {
   try {
     // Find the assignment by ID
     const assignment = await Assignment.findById(req.params.id);
@@ -79,7 +79,7 @@ app.post('/editassignment/:id', async (req, res, next) => {
     // Save the updated assignment
     await assignment.save();
     // Redirect to the assignments page
-    res.redirect('/assignments');
+    res.redirect('/tickets');
   } catch (error) {
     console.error(error);
     next(createError(500));
