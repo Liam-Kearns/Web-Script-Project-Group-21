@@ -16,7 +16,7 @@ router.get('/login',function(req,res,next){
     })
   }
   else{
-    return res.redirect('/')
+    return res.redirect('/index')
   }
 })
 
@@ -96,7 +96,7 @@ router.get('/logout', function(req, res) {
     if (err) {
       return next(err);
     }
-    res.redirect('/');
+    res.redirect('/index');
   });
 });
 
@@ -111,7 +111,7 @@ function requireAuth(req,res,next){
   next()
 }
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/index', function(req, res, next) {
   res.render('index', { title: 'index', displayname: req.user ? req.user.displayname : ''  });
 });
 
